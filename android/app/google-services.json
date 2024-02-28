@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "618105289905",
+    "project_id": "pidum-37a51",
+    "storage_bucket": "pidum-37a51.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:618105289905:android:44b057a49e219449e33690",
+        "android_client_info": {
+          "package_name": "com.example.magang_pidum"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdubQzYVEDuY4CB2igAfa0OkR00TW9Xd0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
