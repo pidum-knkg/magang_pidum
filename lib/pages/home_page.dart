@@ -297,7 +297,7 @@ class _HomePageState extends State<HomePage> {
       debugPrint("startNotifi Notif: $notif");
       var tahap = belumLimpah.t6 ?? belumLimpah.t7;
       var date = tahap.end.subtract(
-        const Duration(days: 10),
+        const Duration(days: 12),
       );
       date = date.add(const Duration(hours: 8));
       if (notif.readed > 0) continue;
