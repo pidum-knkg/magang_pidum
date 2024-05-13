@@ -27,10 +27,7 @@ class _PerkaraListViewState extends State<PerkaraListView> {
     _apiService.fetchBelumLimpah().then((value) {
       if (mounted) {
         setState(() {
-          _listBelumLimpah = value
-              .where((element) =>
-                  element.jpu.map((e) => e.nama).contains(widget.jaksa.nama))
-              .toList();
+          _listBelumLimpah = value.where((element) => element.jpu.map((e) => e.nama).contains(widget.jaksa.nama)).toList();
         });
       }
     });
@@ -72,18 +69,36 @@ class _PerkaraListViewState extends State<PerkaraListView> {
     return ListView(
       children: [
         for (var i = 0; i < (_listBelumLimpah?.length ?? 0); i++)
-          ListTile(
-            onTap: () {
-              gotoPage(PerkaraView(belumLimpah: _listBelumLimpah![i]), context);
-            },
-            title: Text(_listBelumLimpah![i].terdakwa),
-            subtitle: Text(parseTahapRange(
-                _listBelumLimpah![i].t6 ?? _listBelumLimpah![i].t7)),
-            leading: Text(
-              "${i + 1}",
-              style: const TextStyle(fontSize: 18),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8),
+            child: Material(
+              elevation: 5,
+              borderOnForeground: true,
+              shape: RoundedRectangleBorder(
+                side: const BorderSide(color: Colors.black54, width: 1),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              clipBehavior: Clip.antiAlias,
+              shadowColor: Colors.black54,
+              child: ListTile(
+                onTap: () {
+                  gotoPage(PerkaraView(belumLimpah: _listBelumLimpah![i]), context);
+                },
+                title: Text(
+                  _listBelumLimpah![i].terdakwa,
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                subtitle: Text(parseTahapRange(_listBelumLimpah![i].t6 ?? _listBelumLimpah![i].t7)),
+                // leading: Text(
+                //   "${i + 1}",
+                //   style: const TextStyle(fontSize: 18),
+                // ),
+                trailing: Text(_listBelumLimpah![i].pdm),
+              ),
             ),
-            trailing: Text(_listBelumLimpah![i].pdm),
           )
       ],
     );

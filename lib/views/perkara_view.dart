@@ -77,7 +77,12 @@ class _PerkaraViewState extends State<PerkaraView> {
                   verticalAlignment: TableCellVerticalAlignment.bottom,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: Text(widget.belumLimpah.terdakwa),
+                    child: Text(
+                      widget.belumLimpah.terdakwa,
+                      style: const TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
                   ),
                 ),
               ],
@@ -108,7 +113,11 @@ class _PerkaraViewState extends State<PerkaraView> {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
                     child: Text(
-                        widget.belumLimpah.jpu.map((e) => e.nama).join(' / ')),
+                      widget.belumLimpah.jpu.map((e) => e.nama).join(' / '),
+                      style: const TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
                   ),
                 ),
               ],
@@ -138,7 +147,12 @@ class _PerkaraViewState extends State<PerkaraView> {
                   verticalAlignment: TableCellVerticalAlignment.bottom,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: Text(widget.belumLimpah.pdm),
+                    child: Text(
+                      widget.belumLimpah.pdm,
+                      style: const TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
                   ),
                 ),
               ],
@@ -168,7 +182,12 @@ class _PerkaraViewState extends State<PerkaraView> {
                   verticalAlignment: TableCellVerticalAlignment.bottom,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: Text(transformTahapToString(widget.belumLimpah.t7)),
+                    child: Text(
+                      transformTahapToString(widget.belumLimpah.t7),
+                      style: const TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
                   ),
                 ),
               ],
@@ -198,7 +217,12 @@ class _PerkaraViewState extends State<PerkaraView> {
                   verticalAlignment: TableCellVerticalAlignment.bottom,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: Text(transformTahapToString(widget.belumLimpah.t6)),
+                    child: Text(
+                      transformTahapToString(widget.belumLimpah.t6),
+                      style: const TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
                   ),
                 ),
               ],
@@ -228,7 +252,12 @@ class _PerkaraViewState extends State<PerkaraView> {
                   verticalAlignment: TableCellVerticalAlignment.bottom,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: Text(widget.belumLimpah.ditahan),
+                    child: Text(
+                      widget.belumLimpah.ditahan,
+                      style: const TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
                   ),
                 ),
               ],
@@ -258,7 +287,12 @@ class _PerkaraViewState extends State<PerkaraView> {
                   verticalAlignment: TableCellVerticalAlignment.bottom,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: Text(widget.belumLimpah.asalPerkara),
+                    child: Text(
+                      widget.belumLimpah.asalPerkara,
+                      style: const TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
                   ),
                 ),
               ],
@@ -288,7 +322,12 @@ class _PerkaraViewState extends State<PerkaraView> {
                   verticalAlignment: TableCellVerticalAlignment.bottom,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: Text(widget.belumLimpah.pasal),
+                    child: Text(
+                      widget.belumLimpah.pasal,
+                      style: const TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
                   ),
                 ),
               ],
@@ -318,8 +357,12 @@ class _PerkaraViewState extends State<PerkaraView> {
                   verticalAlignment: TableCellVerticalAlignment.bottom,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child:
-                        Text(widget.belumLimpah.statusBarangBukti.toString()),
+                    child: Text(
+                      widget.belumLimpah.statusBarangBukti.toString(),
+                      style: const TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
                   ),
                 ),
               ],

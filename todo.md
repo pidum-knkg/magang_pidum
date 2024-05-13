@@ -1,0 +1,2 @@
+- bigger font size of perkara size
+- 2 digit date of perkara detail

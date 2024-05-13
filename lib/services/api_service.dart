@@ -67,6 +67,11 @@ class Tahap {
   final DateTime start;
   final DateTime end;
 
+  @override
+  String toString() {
+    return "";
+  }
+
   factory Tahap.fromMap(Map<String, String> map) {
     var start = map['start'];
     var end = map['end'];

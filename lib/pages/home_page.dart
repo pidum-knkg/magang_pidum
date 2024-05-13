@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
 import 'package:magang_pidum/pages/login_page.dart';
 import 'package:magang_pidum/services/api_service.dart';
@@ -45,10 +46,7 @@ class _HomePageState extends State<HomePage> {
           handleClickNotif(p, null, value);
         }
       });
-      startNotif(value
-          .where((element) =>
-              element.jpu.map((e) => e.id).contains(_apiService.auth?.id))
-          .toList());
+      startNotif(value.where((element) => element.jpu.map((e) => e.id).contains(_apiService.auth?.id)).toList());
       if (payload != null) {
         handleClickNotif(
           payload,
@@ -80,9 +78,18 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 5,
         title: Text(_apiService.auth?.nama ?? "Pidum"),
       ),
-      body: createBody(context),
+      body: DecoratedBox(
+        decoration: const BoxDecoration(
+            // image: DecorationImage(
+            //   image: AssetImage('assets/corat-batik2.png'),
+            //   repeat: ImageRepeat.repeat,
+            // ),
+            ),
+        child: createBody(context),
+      ),
       drawer: _createDrawer(),
     );
   }
@@ -113,10 +120,11 @@ class _HomePageState extends State<HomePage> {
           });
         },
         child: ListView(
+          clipBehavior: Clip.none,
           children: [
             _searchAnchor(),
             const Gap(20),
-            ElevatedButton(
+            ElevatedButton.icon(
               onPressed: () {
                 if (_apiService.auth == null) {
                   showToast(context, 'Not Logged In');
@@ -127,7 +135,8 @@ class _HomePageState extends State<HomePage> {
                   );
                 }
               },
-              child: const Text("Jadwal Saya"),
+              label: const Text("Jadwal Saya"),
+              icon: const Icon(Icons.date_range),
             ),
             _listKejati(),
             _listKejari(),
@@ -141,8 +150,8 @@ class _HomePageState extends State<HomePage> {
     return Drawer(
       child: ListView(
         children: [
-          const DrawerHeader(
-            decoration: BoxDecoration(
+          DrawerHeader(
+            decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('assets/icon/icon.png'),
                 opacity: .3,
@@ -155,9 +164,22 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            child: Text(
-              "PIDUM",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            child: RichText(
+              text: const TextSpan(
+                children: [
+                  TextSpan(
+                    text: "SIMPLE\n",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                      color: Colors.white,
+                    ),
+                  ),
+                  TextSpan(
+                    text: "Sistem Informasi Manajemen\nPelimpahan Perkara",
+                  )
+                ],
+              ),
             ),
           ),
           ListTile(
@@ -169,8 +191,7 @@ class _HomePageState extends State<HomePage> {
               var sharedPrefs = await SharedPreferences.getInstance();
               await sharedPrefs.clear();
               if (mounted) {
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) => const LoginPage()));
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LoginPage()));
               }
             },
           ),
@@ -182,15 +203,30 @@ class _HomePageState extends State<HomePage> {
   Widget _listKejari() {
     var listKejari = _listJPU!.where((e) => e.cabang == CabangJPU.kejari);
     var listWidget = listKejari
-        .map((e) => ListTile(
-              onTap: () {
-                gotoPage(PerkaraListView(jaksa: e), context);
-              },
-              title: Text(e.nama),
+        .map((e) => Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8),
+              child: Material(
+                elevation: 5,
+                borderOnForeground: true,
+                shape: RoundedRectangleBorder(
+                  side: const BorderSide(color: Colors.black54, width: 1),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                clipBehavior: Clip.antiAlias,
+                shadowColor: Colors.black54,
+                child: ListTile(
+                  onTap: () {
+                    gotoPage(PerkaraListView(jaksa: e), context);
+                  },
+                  title: Text(e.nama),
+                ),
+              ),
             ))
         .toList();
 
     return ExpansionTile(
+      clipBehavior: Clip.none,
+      initiallyExpanded: true,
       shape: const RoundedRectangleBorder(
         side: BorderSide.none,
       ),
@@ -205,15 +241,29 @@ class _HomePageState extends State<HomePage> {
   Widget _listKejati() {
     var listKejati = _listJPU!.where((e) => e.cabang == CabangJPU.kejati);
     var listWidget = listKejati
-        .map((e) => ListTile(
-              onTap: () {
-                gotoPage(PerkaraListView(jaksa: e), context);
-              },
-              title: Text(e.nama),
+        .map((e) => Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8),
+              child: Material(
+                elevation: 5,
+                borderOnForeground: true,
+                shape: RoundedRectangleBorder(
+                  side: const BorderSide(color: Colors.black54, width: 1),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                clipBehavior: Clip.antiAlias,
+                shadowColor: Colors.black54,
+                child: ListTile(
+                  onTap: () {
+                    gotoPage(PerkaraListView(jaksa: e), context);
+                  },
+                  title: Text(e.nama),
+                ),
+              ),
             ))
         .toList();
 
     return ExpansionTile(
+      initiallyExpanded: true,
       shape: const RoundedRectangleBorder(
         side: BorderSide.none,
       ),
@@ -238,22 +288,17 @@ class _HomePageState extends State<HomePage> {
         },
       ),
       suggestionsBuilder: (context, controller) {
-        return _listJPU!
-            .where((element) => element.nama
-                .toLowerCase()
-                .contains(controller.text.toLowerCase()))
-            .map((e) => ListTile(
-                  onTap: () {
-                    gotoPage(PerkaraListView(jaksa: e), context);
-                  },
-                  title: Text(e.nama),
-                ));
+        return _listJPU!.where((element) => element.nama.toLowerCase().contains(controller.text.toLowerCase())).map((e) => ListTile(
+              onTap: () {
+                gotoPage(PerkaraListView(jaksa: e), context);
+              },
+              title: Text(e.nama),
+            ));
       },
     );
   }
 
-  void handleClickNotif(String payload, String? actionId,
-      List<BelumLimpah> listBelumLimpah) async {
+  void handleClickNotif(String payload, String? actionId, List<BelumLimpah> listBelumLimpah) async {
     var found = listBelumLimpah.where((element) => element.pdm == payload);
     if (found.isNotEmpty) {
       var notif = await Notif.findFirstByPdm(found.first.pdm);
@@ -286,14 +331,12 @@ class _HomePageState extends State<HomePage> {
 
   void startNotif(List<BelumLimpah> listBelumLimpah) async {
     debugPrint("registering notif.size: ${listBelumLimpah.length}");
-    var notifs = await Notif.getAllByPDMNotInList(
-        listBelumLimpah.map((e) => e.pdm).toList());
+    var notifs = await Notif.getAllByPDMNotInList(listBelumLimpah.map((e) => e.pdm).toList());
     for (var notif in notifs) {
       _notificationService.notificationsPlugin.cancel(notif.id);
     }
     for (var belumLimpah in listBelumLimpah) {
-      var notif = await Notif.findFirstByPdm(belumLimpah.pdm) ??
-          await Notif.create(pdm: belumLimpah.pdm);
+      var notif = await Notif.findFirstByPdm(belumLimpah.pdm) ?? await Notif.create(pdm: belumLimpah.pdm);
       debugPrint("startNotifi Notif: $notif");
       var tahap = belumLimpah.t6 ?? belumLimpah.t7;
       var date = tahap.end.subtract(

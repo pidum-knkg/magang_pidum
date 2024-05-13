@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 class Notif {
@@ -120,7 +121,8 @@ class NotifDbServices {
 
   Future<NotifDbServices> init() async {
     debugPrint("${await getDatabasesPath()}dev.db");
-    _database = await openDatabase('dev.db');
+    _database = await openDatabase(join(await getDatabasesPath(), "dev.db"));
+    print(_database);
     Notif.init(_database);
     return this;
   }
